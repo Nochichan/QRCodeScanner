@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Ajout de l'affichage type "ScannerQRCode" -->
     <com.budiyev.android.codescanner.CodeScannerView
         android:id="@+id/scanner_view"
         android:layout_width="match_parent"
@@ -22,7 +23,7 @@
         app:frameThickness="5dp"
         app:maskColor="#88000000" />
 
-
+    <!-- Bouton Open -->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,6 +32,7 @@
         android:text="Open"
         android:id="@+id/button_list"/>
 
+    <!-- Bouton Reset -->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,6 +42,7 @@
         android:text="Reset"
         android:id="@+id/button_reset"/>
 
+    <!-- Bouton Num -->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,6 +52,7 @@
         android:backgroundTint="#00FFCC"
         android:id="@+id/button_select_num"/>
 
+    <!-- TextView Latitude -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,6 +61,7 @@
         android:id="@+id/latitude"
         android:text="Latitude"/>
 
+    <!-- TextView Longitude -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,6 +70,7 @@
         android:id="@+id/longitude"
         android:text="Longitude"/>
 
+    <!-- TextView Altitude -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -73,6 +79,7 @@
         android:id="@+id/altitude"
         android:text="Altitude"/>
 
+    <!-- TextView Vitesse -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,6 +88,7 @@
         android:id="@+id/vitesse"
         android:text="Vitesse"/>
 
+    <!-- TextView Numero -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -88,5 +96,4 @@
         android:textColor="#00FF00"
         android:id="@+id/current_num"
         android:text="Numero"/>
-
 </FrameLayout>
