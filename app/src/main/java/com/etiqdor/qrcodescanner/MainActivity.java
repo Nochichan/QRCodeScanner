@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView longitude;
     private TextView altitude;
     private TextView speed;
+    private TextView num;
 
     protected static SQLiteHelper helper;
 
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         this.longitude = findViewById(R.id.longitude);
         this.altitude= findViewById(R.id.altitude);
         this.speed = findViewById(R.id.vitesse);
+        this.num = findViewById(R.id.current_num);
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -123,7 +125,10 @@ public class MainActivity extends AppCompatActivity {
                 longitude.setText("Longitude : " + location.getLongitude());
                 altitude.setText("Altitude : " + location.getAltitude());
                 speed.setText("Speed : " + location.getSpeed());
-
+//                if(TelephoneNum.currentNum != null) {
+//                    System.out.println(TelephoneNum.currentNum.getName());
+//                    num.setText("Numero : " + TelephoneNum.currentNum.getName());
+//                }
                 //System.out.println("Latitude " + location.getLatitude() + " et longitude " + location.getLongitude());
             }
         });
@@ -168,6 +173,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(menuActivity);
         });
 
+        this.buttonSelectNum.setOnClickListener(v->{
+            Intent menuActivity = new Intent(MainActivity.this, NumActivity.class);
+            startActivity(menuActivity);
+        });
+
         /*this.buttonAddLocation.setOnClickListener(v -> {
             if (location2 != null){
 
@@ -187,6 +197,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if(TelephoneNum.currentNum != null)
+            this.num.setText("Numero : " + TelephoneNum.currentNum.getName());
         this.mCodeScanner.startPreview();
     }
 
@@ -207,8 +219,4 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Aucun numéro séléctionné", Toast.LENGTH_SHORT).show();
         }
     }
-
-
-
-
 }

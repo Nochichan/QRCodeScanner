@@ -81,4 +81,12 @@
         android:id="@+id/vitesse"
         android:text="Vitesse"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="610dp"
+        android:textColor="#00FF00"
+        android:id="@+id/current_num"
+        android:text="Numero"/>
+
 </FrameLayout>
