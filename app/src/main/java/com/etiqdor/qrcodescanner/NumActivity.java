@@ -1,8 +1,6 @@
 package com.etiqdor.qrcodescanner;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -10,7 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author etiqdor
@@ -33,8 +30,7 @@ public class NumActivity extends AppCompatActivity {
         }
 
         // Remplissage de la ListView
-        final List<String> num_list = nums;
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, num_list);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nums);
         list.setAdapter(arrayAdapter);
 
         // Lorsqu'on clique sur un élement, il est enregistré comme numéro actuel

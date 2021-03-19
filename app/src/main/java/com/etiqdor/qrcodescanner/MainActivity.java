@@ -11,7 +11,6 @@ import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
 import android.telephony.SmsManager;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        ArrayList<LocationProvider> providers = new ArrayList<LocationProvider>();
+        ArrayList<LocationProvider> providers = new ArrayList<>();
         List<String> names = locationManager.getProviders(true);
 
         for (String name : names)
@@ -107,32 +106,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onLocationChanged(Location location) {
                 location2 = location;
-                latitude.setText("Latitude : " + location.getLatitude());
-                longitude.setText("Longitude : " + location.getLongitude());
-                altitude.setText("Altitude : " + location.getAltitude());
-                speed.setText("Speed : " + location.getSpeed());
+                latitude.setText(("Latitude : " + location.getLatitude()));
+                longitude.setText(("Longitude : " + location.getLongitude()));
+                altitude.setText(("Altitude : " + location.getAltitude()));
+                speed.setText(("Speed : " + location.getSpeed()));
             }
         });
 
         CodeScannerView scannerView = findViewById(R.id.scanner_view);
         this.mCodeScanner = new CodeScanner(this, scannerView);
-        this.mCodeScanner.setDecodeCallback(new DecodeCallback() {
-            @Override
-            public void onDecoded(@NonNull final Result result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (location2 != null){
-                            SQLiteUtil.insertInto(helper, ""+location2.getLatitude(),""+location2.getLongitude(),""+location2.getAltitude(), result.getText());
-                            //sendMessage(result);
-                        }
-                       /*String url = result.getText();
-                        Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse(url));
-                        startActivity(intent);*/
-                    }
-                });
+        this.mCodeScanner.setDecodeCallback(result -> runOnUiThread(() -> {
+            if (location2 != null){
+                SQLiteUtil.insertInto(helper, ""+location2.getLatitude(),""+location2.getLongitude(),""+location2.getAltitude(), result.getText());
+                //sendMessage(result);
             }
-        });
+           /*String url = result.getText();
+            Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(intent);*/
+        }));
         scannerView.setOnClickListener(view -> mCodeScanner.startPreview());
 
         // Lorsqu'on appui sur le bouton Open, ouverture de la listes contenant touts les localisations enregsitrées
@@ -155,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if(TelephoneNum.currentNum != null)
-            this.num.setText("Numero : " + TelephoneNum.currentNum.getName());
+            this.num.setText(("Numero : " + TelephoneNum.currentNum.getName()));
         this.mCodeScanner.startPreview();
     }
 
@@ -167,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Méthode permettant d'envoyer un message depuis le téléphone
-     * @param result
+     * @param result Le résultat du QRCode
      */
     private void sendMessage(Result result){
         // Le message à envoyer

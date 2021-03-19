@@ -25,7 +25,7 @@ public class LocalisationActivity extends AppCompatActivity {
 
         // Remplissage de la ListView
         final List<String> location_list = SQLiteUtil.getLocation(MainActivity.helper);
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, location_list);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, location_list);
         listLocation.setAdapter(arrayAdapter);
     }
 }
