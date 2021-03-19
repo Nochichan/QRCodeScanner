@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author etiqdor
+ */
 public class NumActivity extends AppCompatActivity {
 
     private ListView list;
@@ -23,23 +26,18 @@ public class NumActivity extends AppCompatActivity {
 
         list = findViewById(R.id.list_num);
 
+        // Enregistrement du nom et du numéro dans une liste
         ArrayList<String> nums = new ArrayList<>();
-
         for (TelephoneNum num : TelephoneNum.getAllNum()){
             nums.add( (num.getName() + " : " + num.getNum()) );
         }
 
+        // Remplissage de la ListView
         final List<String> num_list = nums;
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, num_list);
-
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, num_list);
         list.setAdapter(arrayAdapter);
 
-
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TelephoneNum.currentNum = TelephoneNum.values()[position];
-            }
-        });
+        // Lorsqu'on clique sur un élement, il est enregistré comme numéro actuel
+        list.setOnItemClickListener((parent, view, position, id) -> TelephoneNum.currentNum = TelephoneNum.values()[position]);
     }
 }

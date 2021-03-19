@@ -30,6 +30,9 @@ import com.google.zxing.Result;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author etiqdor
+ */
 public class MainActivity extends AppCompatActivity {
     private CodeScanner mCodeScanner;
     private Location location2;
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         MainActivity.helper = new SQLiteHelper(this);
 
+        // Assignement de tous les élements graphiques aux variables
         this.buttonList = findViewById(R.id.button_list);
         this.buttonSelectNum = findViewById(R.id.button_select_num);
         this.buttonReset = findViewById(R.id.button_reset);
@@ -71,25 +75,12 @@ public class MainActivity extends AppCompatActivity {
 
         Criteria critere = new Criteria();
 
-        // Pour indiquer la précision voulue
-        // On peut mettre ACCURACY_FINE pour une haute précision ou ACCURACY_COARSE pour une moins bonne précision
         critere.setAccuracy(Criteria.ACCURACY_FINE);
-
-        // Est-ce que le fournisseur doit être capable de donner une altitude ?
-        critere.setAltitudeRequired(true);
-
-        // Est-ce que le fournisseur doit être capable de donner une direction ?
-        critere.setBearingRequired(true);
-
-        // Est-ce que le fournisseur peut être payant ?
-        critere.setCostAllowed(false);
-
-        // Pour indiquer la consommation d'énergie demandée
-        // Criteria.POWER_HIGH pour une haute consommation, Criteria.POWER_MEDIUM pour une consommation moyenne et Criteria.POWER_LOW pour une basse consommation
-        critere.setPowerRequirement(Criteria.POWER_HIGH);
-
-        // Est-ce que le fournisseur doit être capable de donner une vitesse ?
-        critere.setSpeedRequired(true);
+        critere.setAltitudeRequired(true); // Altitude
+        critere.setBearingRequired(true); // Direction
+        critere.setCostAllowed(false); // Payant
+        critere.setPowerRequirement(Criteria.POWER_HIGH); // Consommation d'énergie
+        critere.setSpeedRequired(true); // Vitesse
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -101,35 +92,25 @@ public class MainActivity extends AppCompatActivity {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, /*60000*/ 100, 0, new LocationListener() {
 
             @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
+            public void onStatusChanged(String provider, int status, Bundle extras) {}
 
             @Override
-            public void onProviderEnabled(String provider) {
-            }
+            public void onProviderEnabled(String provider) {}
 
             @Override
-            public void onProviderDisabled(String provider) {
-
-            }
+            public void onProviderDisabled(String provider) {}
 
             @Override
             public void onLocationChanged(Location location) {
                 location2 = location;
-
                 latitude.setText("Latitude : " + location.getLatitude());
                 longitude.setText("Longitude : " + location.getLongitude());
                 altitude.setText("Altitude : " + location.getAltitude());
                 speed.setText("Speed : " + location.getSpeed());
-//                if(TelephoneNum.currentNum != null) {
-//                    System.out.println(TelephoneNum.currentNum.getName());
-//                    num.setText("Numero : " + TelephoneNum.currentNum.getName());
-//                }
-                //System.out.println("Latitude " + location.getLatitude() + " et longitude " + location.getLongitude());
             }
         });
 
@@ -141,23 +122,9 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        //String content = line + ". Latitude " + location2.getLatitude() + " et longitude " + location2.getLongitude();
                         if (location2 != null){
                             SQLiteUtil.insertInto(helper, ""+location2.getLatitude(),""+location2.getLongitude(),""+location2.getAltitude(), result.getText());
-                            //Toast.makeText(MainActivity.this, "Latitude " + location2.getLatitude() + " et longitude " + location2.getLongitude(), Toast.LENGTH_SHORT).show();
-
-                            sendMessage(result);
-
-//                            SmsManager.getDefault().sendTextMessage(TelephoneNum.GAYA.getNum(), null, msg, null, null);
-//                            SmsManager.getDefault().sendTextMessage(TelephoneNum.MAXIME.getNum(), null, msg, null, null);
-//                            SmsManager.getDefault().sendTextMessage(TelephoneNum.AXEL.getNum(), null, msg, null, null);
-//                            SmsManager.getDefault().sendTextMessage(TelephoneNum.DORYAN.getNum(), null, msg, null, null);
-//                            SmsManager.getDefault().sendTextMessage(TelephoneNum.KARIM.getNum(), null, msg, null, null);
-//                            SmsManager.getDefault().sendTextMessage(TelephoneNum.LEO.getNum(), null, msg, null, null);
-//                            SmsManager.getDefault().sendTextMessage(TelephoneNum.SEVAN.getNum(), null, msg, null, null);
-//                            SmsManager.getDefault().sendTextMessage(TelephoneNum.RYAN.getNum(), null, msg, null, null);
-//                            SmsManager.getDefault().sendTextMessage(TelephoneNum.UBALDO.getNum(), null, msg, null, null);
-//                            SmsManager.getDefault().sendTextMessage(TelephoneNum.FLORIAN.getNum(), null, msg, null, null);
+                            //sendMessage(result);
                         }
                        /*String url = result.getText();
                         Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse(url));
@@ -168,29 +135,19 @@ public class MainActivity extends AppCompatActivity {
         });
         scannerView.setOnClickListener(view -> mCodeScanner.startPreview());
 
+        // Lorsqu'on appui sur le bouton Open, ouverture de la listes contenant touts les localisations enregsitrées
         this.buttonList.setOnClickListener(v -> {
             Intent menuActivity = new Intent(MainActivity.this, LocalisationActivity.class);
             startActivity(menuActivity);
         });
 
+        // Lorsqu'on appui sur le bouton Num, ouverture de la listes contenant tous les numéros de téléphone enregsitrés
         this.buttonSelectNum.setOnClickListener(v->{
             Intent menuActivity = new Intent(MainActivity.this, NumActivity.class);
             startActivity(menuActivity);
         });
 
-        /*this.buttonAddLocation.setOnClickListener(v -> {
-            if (location2 != null){
-
-//                    SQLiteDatabase db = helper.getReadableDatabase();
-//                    db.execSQL("DROP TABLE qr_code;");
-//                    String sqlCreateDatatableQuiz = "CREATE TABLE qr_code(id_qr_code INTEGER PRIMARY KEY, latitude TEXT, longitude TEXT, altitude TEXT);";
-//                    db.execSQL(sqlCreateDatatableQuiz);
-
-                //LocationSave.saveLocation(location2.getLatitude(), location2.getLongitude(), location2.getAltitude(), location2.getSpeed());
-                SQLiteUtil.insertInto(helper, ""+location2.getLatitude(),""+location2.getLongitude(),""+location2.getAltitude(), result.getT);
-            }
-        });*/
-
+        // Lorsqu'on appui sur le bouton Reset, réinitialisaiton de la base de données
         this.buttonReset.setOnClickListener(v -> SQLiteUtil.resetDatabase(helper, MainActivity.this));
     }
 
@@ -208,14 +165,21 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
     }
 
-
+    /**
+     * Méthode permettant d'envoyer un message depuis le téléphone
+     * @param result
+     */
     private void sendMessage(Result result){
+        // Le message à envoyer
         String msg = "Latitude : " + location2.getLatitude() + ", Longitude : " +  location2.getLongitude() + ", Altitude : " + location2.getAltitude() + ", Vitesse :" + location2.getSpeed() + ", Site Web : " + result.getText() ;
 
+        // Vérifie si un numéro est sélectionné
         if (TelephoneNum.currentNum != null){
+            // Envoie du message
             SmsManager.getDefault().sendTextMessage(TelephoneNum.currentNum.getNum(), null, msg, null, null);
         }
         else{
+            // Affichage d'une erreur
             Toast.makeText(MainActivity.this, "Aucun numéro séléctionné", Toast.LENGTH_SHORT).show();
         }
     }

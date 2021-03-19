@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 /**
  * Enum contenant tous les numéros de téléphones enregistré de base dans l'application
+ * @author etiqdor
  */
 public enum TelephoneNum {
         GAYA("0", "Gaya"),
@@ -38,10 +39,16 @@ public enum TelephoneNum {
                 return num;
         }
 
+        /**
+         * @return Le nom associé au numéro
+         */
         public String getName(){
                 return name;
         }
 
+        /**
+         * @return Une liste de tous les numéros de l'Enum
+         */
         public static ArrayList<TelephoneNum> getAllNum(){
                 ArrayList<TelephoneNum> list = new ArrayList<>();
                 for(TelephoneNum num : TelephoneNum.values()){
@@ -50,7 +57,6 @@ public enum TelephoneNum {
                 return list;
         }
 
+        // Le numéro actuellement sélectionné
         public static TelephoneNum currentNum;
 }
-
-

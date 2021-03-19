@@ -4,6 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * @author etiqdor
+ */
 public class SQLiteHelper extends SQLiteOpenHelper {
 
     static String DB_NAME = "QRCode_Scanner_ETIQDOR.db";
