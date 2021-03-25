@@ -14,20 +14,19 @@ import java.util.ArrayList;
  */
 public class NumActivity extends AppCompatActivity {
 
-    private ListView list;
+//    private ListView list;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_num);
 
-        list = findViewById(R.id.list_num);
+        ListView list = findViewById(R.id.list_num);
 
         // Enregistrement du nom et du numéro dans une liste
         ArrayList<String> nums = new ArrayList<>();
-        for (TelephoneNum num : TelephoneNum.getAllNum()){
+        for (TelephoneNum num : TelephoneNum.getAllNum())
             nums.add( (num.getName() + " : " + num.getNum()) );
-        }
 
         // Remplissage de la ListView
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nums);

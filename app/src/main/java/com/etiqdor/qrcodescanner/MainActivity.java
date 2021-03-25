@@ -35,6 +35,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private CodeScanner mCodeScanner;
     private Location location2;
+
     private Button buttonList;
     private Button buttonSelectNum;
     private Button buttonReset;
@@ -72,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
         for (String name : names)
             providers.add(locationManager.getProvider(name));
 
+        // Création des critères du fournisseur
         Criteria critere = new Criteria();
-
         critere.setAccuracy(Criteria.ACCURACY_FINE);
         critere.setAltitudeRequired(true); // Altitude
         critere.setBearingRequired(true); // Direction
@@ -82,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
         critere.setSpeedRequired(true); // Vitesse
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
             //                                          int[] grantResults)
@@ -92,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        // Lorsqu'on demande de mettre à jour la position
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, /*60000*/ 100, 0, new LocationListener() {
 
             @Override
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         this.mCodeScanner.setDecodeCallback(result -> runOnUiThread(() -> {
             if (location2 != null){
                 SQLiteUtil.insertInto(helper, ""+location2.getLatitude(),""+location2.getLongitude(),""+location2.getAltitude(), result.getText());
-                //sendMessage(result);
+                sendMessage(result);
             }
            /*String url = result.getText();
             Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse(url));

@@ -50,9 +50,8 @@ public enum TelephoneNum {
          */
         public static ArrayList<TelephoneNum> getAllNum(){
                 ArrayList<TelephoneNum> list = new ArrayList<>();
-                for(TelephoneNum num : TelephoneNum.values()){
+                for(TelephoneNum num : TelephoneNum.values())
                         list.add(num);
-                }
                 return list;
         }
 

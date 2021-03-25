@@ -26,7 +26,6 @@ public class SQLiteUtil {
 
     /**
      * Permet d'ajouter une ligne dans la base de données
-     * Les arguments doivent être séparé par des virgules
      * @param helper Le helper qui permet d'ouvrir la base de donnée
      * @param arg1 Le premier argument de la requête (latitude)
      * @param arg2 Le deuxième argument de la requête (longitude)
