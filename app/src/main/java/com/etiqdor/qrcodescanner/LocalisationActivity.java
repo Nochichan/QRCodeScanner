@@ -15,13 +15,13 @@ import java.util.List;
  */
 public class LocalisationActivity extends AppCompatActivity {
 
-    private ListView listLocation;
+//    private ListView listLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_localisation);
-        listLocation = findViewById(R.id.list_location);
+        ListView listLocation = findViewById(R.id.list_location);
 
         // Remplissage de la ListView
         final List<String> location_list = SQLiteUtil.getLocation(MainActivity.helper);
