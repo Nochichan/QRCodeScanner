@@ -15,13 +15,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
-import com.budiyev.android.codescanner.DecodeCallback;
 import com.etiqdor.qrcodescanner.sqlite.SQLiteHelper;
 import com.etiqdor.qrcodescanner.sqlite.SQLiteUtil;
 import com.google.zxing.Result;
@@ -165,13 +163,9 @@ public class MainActivity extends AppCompatActivity {
         String msg = "Latitude : " + location2.getLatitude() + ", Longitude : " +  location2.getLongitude() + ", Altitude : " + location2.getAltitude() + ", Vitesse :" + location2.getSpeed() + ", Site Web : " + result.getText() ;
 
         // Vérifie si un numéro est sélectionné
-        if (TelephoneNum.currentNum != null){
-            // Envoie du message
+        if (TelephoneNum.currentNum != null) // Envoie du message
             SmsManager.getDefault().sendTextMessage(TelephoneNum.currentNum.getNum(), null, msg, null, null);
-        }
-        else{
-            // Affichage d'une erreur
+        else // Affichage d'une erreur
             Toast.makeText(MainActivity.this, "Aucun numéro séléctionné", Toast.LENGTH_SHORT).show();
-        }
     }
 }
