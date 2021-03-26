@@ -9,6 +9,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
+import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.widget.Button;
@@ -118,9 +119,10 @@ public class MainActivity extends AppCompatActivity {
                 SQLiteUtil.insertInto(helper, ""+location2.getLatitude(),""+location2.getLongitude(),""+location2.getAltitude(), result.getText());
                 sendMessage(result);
             }
-           /*String url = result.getText();
-            Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse(url));
-            startActivity(intent);*/
+//            // Ouvre un naviguateur avec le lien obtenu
+//            String url = result.getText();
+//            Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse(url));
+//            startActivity(intent);
         }));
         scannerView.setOnClickListener(view -> mCodeScanner.startPreview());
 
@@ -143,8 +145,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(TelephoneNum.currentNum != null)
+        if(TelephoneNum.currentNum != null) {
             this.num.setText(("Numero : " + TelephoneNum.currentNum.getName()));
+        }
         this.mCodeScanner.startPreview();
     }
 
@@ -158,13 +161,14 @@ public class MainActivity extends AppCompatActivity {
      * Méthode permettant d'envoyer un message depuis le téléphone
      * @param result Le résultat du QRCode
      */
-    private void sendMessage(Result result){
+    private void sendMessage(Result result) {
         // Le message à envoyer
-        String msg = "Latitude : " + location2.getLatitude() + ", Longitude : " +  location2.getLongitude() + ", Altitude : " + location2.getAltitude() + ", Vitesse :" + location2.getSpeed() + ", Site Web : " + result.getText() ;
+        String msg = "Latitude : " + location2.getLatitude() + ", Longitude : " + location2.getLongitude() + ", Altitude : " + location2.getAltitude() + ", Vitesse :" + location2.getSpeed() + ", Site Web : " + result.getText();
 
         // Vérifie si un numéro est sélectionné
-        if (TelephoneNum.currentNum != null) // Envoie du message
+        if (TelephoneNum.currentNum != null){ // Envoie du message
             SmsManager.getDefault().sendTextMessage(TelephoneNum.currentNum.getNum(), null, msg, null, null);
+        }
         else // Affichage d'une erreur
             Toast.makeText(MainActivity.this, "Aucun numéro séléctionné", Toast.LENGTH_SHORT).show();
     }
