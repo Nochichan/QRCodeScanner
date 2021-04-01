@@ -3,7 +3,7 @@ package com.etiqdor.qrcodescanner;
 import java.util.ArrayList;
 
 /**
- * Enum contenant tous les numéros de téléphones enregistrés de base dans l'application
+ * Enum contenant tous les numéros de téléphones enregistrés de base dans l'application (la ils ont tous 0 mais si on maisun numéro ca marche)
  * @author etiqdor
  */
 public enum TelephoneNum {

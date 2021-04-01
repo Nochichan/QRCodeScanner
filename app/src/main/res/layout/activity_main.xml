@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="680dp"
         android:backgroundTint="#ff0000"
-        android:text="Open"
+        android:text="@string/app_open"
         android:id="@+id/button_list"/>
 
     <!-- Bouton Reset -->
@@ -39,14 +39,14 @@
         android:layout_marginTop="680dp"
         android:backgroundTint="#FF5500"
         android:layout_gravity="center_horizontal"
-        android:text="Reset"
+        android:text="@string/app_reset"
         android:id="@+id/button_reset"/>
 
     <!-- Bouton Num -->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Num"
+        android:text="@string/app_num"
         android:layout_marginTop="680dp"
         android:layout_marginLeft="300dp"
         android:backgroundTint="#ffAA00"
@@ -59,7 +59,7 @@
         android:layout_marginTop="550dp"
         android:textColor="#FF0000"
         android:id="@+id/latitude"
-        android:text="Latitude"/>
+        android:text="@string/app_latitude"/>
 
     <!-- TextView Longitude -->
     <TextView
@@ -68,7 +68,7 @@
         android:layout_marginTop="565dp"
         android:textColor="#ff4400"
         android:id="@+id/longitude"
-        android:text="Longitude"/>
+        android:text="@string/app_longitude"/>
 
     <!-- TextView Altitude -->
     <TextView
@@ -77,7 +77,7 @@
         android:layout_marginTop="580dp"
         android:textColor="#FF8800"
         android:id="@+id/altitude"
-        android:text="Altitude"/>
+        android:text="@string/app_altitude"/>
 
     <!-- TextView Vitesse -->
     <TextView
@@ -86,7 +86,7 @@
         android:layout_marginTop="595dp"
         android:textColor="#FFCC00"
         android:id="@+id/vitesse"
-        android:text="Vitesse"/>
+        android:text="@string/app_speed"/>
 
     <!-- TextView Numero -->
     <TextView
@@ -95,5 +95,5 @@
         android:layout_marginTop="610dp"
         android:textColor="#FFFF00"
         android:id="@+id/current_num"
-        android:text="Numero"/>
+        android:text="@string/app_numero"/>
 </FrameLayout>

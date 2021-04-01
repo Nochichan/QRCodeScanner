@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">QRCodeScanner</string>
+
+    <string name="app_latitude">Latitude</string>
+    <string name="app_longitude">Longitude</string>
+    <string name="app_altitude">Altitude</string>
+    <string name="app_speed">Vitesse</string>
+    <string name="app_numero">Numéro</string>
+    <string name="app_open">Ouvrir</string>
+    <string name="app_reset">Reset</string>
+    <string name="app_num">Num.</string>
+
+
 </resources>
